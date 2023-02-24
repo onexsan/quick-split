@@ -6,7 +6,7 @@
           v-if="showBackBtn"
           to="/"
           icon="arrow-left"
-          class="back-btn"
+          class="back-btn border-none"
         />
       </van-col>
       <van-col class="align-center justify-center" span="8">
@@ -42,7 +42,6 @@ const showBackBtn = computed(() => {
     }
   }
   .back-btn {
-    border: none;
     padding: var(--space-sm);
     height: 38px;
 

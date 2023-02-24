@@ -5,7 +5,7 @@
     </van-row>
   </div>
   <div class="group-wrapper">
-    <van-button to="/itemized" round block native-type="submit">
+    <van-button to="/itemized" round block>
       Split by item
     </van-button>
   </div>

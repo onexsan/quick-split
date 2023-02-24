@@ -46,6 +46,16 @@ body, #app {
   }
 }
 
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 a {
   text-decoration: none;
   color: var(--text-white);
@@ -67,4 +77,8 @@ a {
 .justify-center {
   display: flex;
   justify-content: center;
+}
+
+.border-none {
+  border: none;
 }

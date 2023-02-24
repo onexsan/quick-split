@@ -19,17 +19,19 @@
         placeholder="Number of friends involved"
         :rules="[{ required: true, message: 'Number of friends is required' }]"
       />
-      <van-field
-        v-if="includeTip"
-        v-model.number="tip"
-        left-icon="like-o"
-        type="number"
-        name="Tip"
-        label="Tip"
-        :formatter="tipFormatter"
-        format-trigger="onBlur"
-        placeholder="Tip (percent)"
-      />
+      <transition>
+        <van-field
+          v-if="includeTip"
+          v-model.number="tip"
+          left-icon="like-o"
+          type="number"
+          name="Tip"
+          label="Tip"
+          :formatter="tipFormatter"
+          format-trigger="onBlur"
+          placeholder="Tip (percent)"
+        />
+      </transition>
     </van-cell-group>
     <div class="group-wrapper">
       <van-checkbox
