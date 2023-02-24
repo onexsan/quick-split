@@ -17,35 +17,45 @@ body, #app {
 
 #app {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex: 1;
   height: 100%;
   color: var(--text-white);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
-  font-family: Inter, Helvetica, Roboto, 'Fira Sans', 'Droid Sans', sans-serif;
+  font-family: 'Inter', Helvetica, Roboto, sans-serif;
   font-size: var(--space-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: var(--space-md) 0px;
 
-  .wrapper {
-    background: var(--bg-dark);
-    height: 100%;
-    max-width: 520px;
+  .van-config-provider {
     width: 100%;
-    padding: 0px var(--space-base);
-    margin: 0 auto;
+    min-height: 380px;
+    margin: auto;
+    background: var(--bg-dark);
+    max-width: 520px;
+    padding: var(--space-base);
+    margin: 0px var(--space-md);
+    border-radius: var(--border-radius);
+
+    @media all and (max-width: 480px) {
+      padding: var(--space-sm);
+    }
   }
 }
 
 a {
   text-decoration: none;
-  color: var(--primary);
+  color: var(--text-white);
   transition: 0.4s;
-}
 
-@media (hover: hover) {
-  a:hover {
-    color: var(--text-white);
+  &:hover {
+    color: var(--primary);
   }
 }
 
+.translucent {
+  color: var(--translucent-white);
+}

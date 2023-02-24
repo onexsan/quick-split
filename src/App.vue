@@ -4,9 +4,9 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <div class="wrapper">
+  <van-config-provider theme="dark">
     <AppHeader />
     <RouterView />
-  </div>
+  </van-config-provider>
 </template>
 

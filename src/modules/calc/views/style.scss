@@ -1,0 +1,26 @@
+.group-wrapper {
+  margin: var(--van-cell-group-inset-padding);
+  margin-top: var(--space-base);
+
+  .checkbox {
+    padding-left: 14px;
+
+    .van-checkbox__label {
+      font-size: 14px;
+    }
+  }
+}
+
+.van-field {
+  @media all and (max-width: 480px) {
+    .van-field__label {
+      width: auto;
+    }
+  }
+}
+.van-cell-group--inset, .group-wrapper {
+  @media all and (max-width: 480px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
