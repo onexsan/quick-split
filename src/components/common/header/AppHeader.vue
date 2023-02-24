@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <van-row>
-      <van-col span="8">
+      <van-col class="align-center" span="8">
         <van-button
           v-if="showBackBtn"
           to="/"
@@ -9,7 +9,7 @@
           class="back-btn"
         />
       </van-col>
-      <van-col class="center" :span="8">
+      <van-col class="align-center justify-center" span="8">
         <RouterLink class="logo" to="/">
           Quick Split
         </RouterLink>
@@ -36,13 +36,11 @@ const showBackBtn = computed(() => {
     align-self: center;
     font-weight: 600;
     font-size: var(--space-md);
-  }
-  .center {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-  }
 
+    @media all and (max-width: 480px) {
+      font-size: var(--space-base);
+    }
+  }
   .back-btn {
     border: none;
     padding: var(--space-sm);
@@ -50,6 +48,12 @@ const showBackBtn = computed(() => {
 
     &:hover {
       color: var(--primary);
+    }
+
+    @media all and (max-width: 480px) {
+      padding: 8px;
+      font-size: 12px;
+      height: var(--space-base);
     }
   }
 }

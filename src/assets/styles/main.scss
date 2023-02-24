@@ -59,3 +59,12 @@ a {
 .translucent {
   color: var(--translucent-white);
 }
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+.justify-center {
+  display: flex;
+  justify-content: center;
+}
