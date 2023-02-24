@@ -1,0 +1,19 @@
+:root {
+  --bg-main: #000000;
+  --bg-dark: #141516;
+  --text-white: rgba(255, 255, 255, 0.8);;
+  --icons-white: rgba(255, 255, 255, 0.5);
+  --primary: #F5A623;
+  --negative: #C22F00;
+  --space-base: 16px;
+}
+
+
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}

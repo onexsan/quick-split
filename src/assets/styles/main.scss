@@ -1,0 +1,51 @@
+@import './base.scss';
+
+html {
+  height: 100%;
+  display: flex;
+}
+body {
+  height: 100%;
+  padding: 0;
+  position: relative;
+  flex: 1;
+}
+
+body, #app {
+  background: var(--bg-main);
+}
+
+#app {
+  display: flex;
+  flex: 1;
+  height: 100%;
+  color: var(--text-white);
+  transition: color 0.5s, background-color 0.5s;
+  line-height: 1.6;
+  font-family: Inter, Helvetica, Roboto, 'Fira Sans', 'Droid Sans', sans-serif;
+  font-size: var(--space-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  .wrapper {
+    background: var(--bg-dark);
+    height: 100%;
+    max-width: 520px;
+    width: 100%;
+    padding: 0px var(--space-base);
+    margin: 0 auto;
+  }
+}
+
+a {
+  text-decoration: none;
+  color: var(--primary);
+  transition: 0.4s;
+}
+
+@media (hover: hover) {
+  a:hover {
+    color: var(--text-white);
+  }
+}
+
