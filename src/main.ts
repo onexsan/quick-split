@@ -11,7 +11,8 @@ import { Button,
          Col,
          Stepper,
          Collapse,
-         CollapseItem
+         CollapseItem,
+         Popup
         } from 'vant';
 import 'vant/lib/index.css';
 
@@ -47,5 +48,6 @@ app.use(Col);
 app.use(Stepper);
 app.use(Collapse);
 app.use(CollapseItem);
+app.use(Popup);
 
 app.mount("#app");

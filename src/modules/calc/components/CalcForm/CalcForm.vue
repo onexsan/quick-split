@@ -45,7 +45,7 @@
     </div>
     <div class="group-wrapper">
       <van-button round block type="primary" native-type="submit">
-        Submit
+        Calculate
       </van-button>
       <template v-if="result">
         <br/>

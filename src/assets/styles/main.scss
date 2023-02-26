@@ -1,14 +1,19 @@
 @import './base.scss';
 
 html {
-  height: 100%;
-  display: flex;
+  height: fit-content;
+  min-height: 100vh;
+
 }
 body {
   height: 100%;
+  min-height: 100vh;
   padding: 0;
   position: relative;
   flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 body, #app {
@@ -20,7 +25,7 @@ body, #app {
   align-items: center;
   justify-content: center;
   flex: 1;
-  height: 100%;
+  height: fit-content;
   color: var(--text-white);
   transition: color 0.5s, background-color 0.5s;
   line-height: 1.6;
@@ -31,11 +36,12 @@ body, #app {
   padding: var(--space-md) 0px;
 
   .van-config-provider {
-    width: 100%;
+    height: 100%;
     min-height: 380px;
+    min-width: 520px;
+    max-width: 80vw;
     margin: auto;
     background: var(--bg-dark);
-    max-width: 520px;
     padding: var(--space-base);
     margin: 0px var(--space-md);
     border-radius: var(--border-radius);
@@ -81,4 +87,8 @@ a {
 
 .border-none {
   border: none;
+}
+
+.mt-base {
+  margin-top: var(--space-base);
 }
