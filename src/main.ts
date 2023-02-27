@@ -1,19 +1,20 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import { Button,
-         Form,
-         Field,
-         Checkbox,
-         Cell,
-         CellGroup,
-         ConfigProvider,
-         Row,
-         Col,
-         Stepper,
-         Collapse,
-         CollapseItem,
-         Popup
-        } from 'vant';
+import {
+  Button,
+  Form,
+  Field,
+  Checkbox,
+  Cell,
+  CellGroup,
+  ConfigProvider,
+  Row,
+  Col,
+  Stepper,
+  Collapse,
+  CollapseItem,
+  Popup
+} from 'vant';
 import 'vant/lib/index.css';
 
 import App from "./App.vue";

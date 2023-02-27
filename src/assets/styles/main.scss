@@ -3,8 +3,8 @@
 html {
   height: fit-content;
   min-height: 100vh;
-
 }
+
 body {
   height: 100%;
   min-height: 100vh;
@@ -48,6 +48,10 @@ body, #app {
 
     @media all and (max-width: 480px) {
       padding: var(--space-sm);
+    }
+
+    &._wide {
+      min-width: 90vw;
     }
   }
 }

@@ -2,22 +2,22 @@
   <tr>
     <td>
       <van-field
-        :modelValue="props.item.description"
-        @update:modelValue="updateItem('description', $event)"
+        :modelValue="props.item.itemName"
+        @update:modelValue="updItem('itemName', $event)"
         left-icon="cart-o"
-        placeholder="Description"
+        placeholder="Name"
       />
     </td>
     <td>
       <van-field
         :modelValue="props.item.price"
-        @update:modelValue="updateItem('price', +$event)"
+        @update:modelValue="updItem('price', +$event)"
         type="number"
         placeholder="Price"
       />
     </td>
     <td
-      v-for="friend in friendList"
+      v-for="friend in friendsList"
       :key="friend.id"
     >
       <van-button
@@ -43,30 +43,39 @@
 
 <script lang="ts">
 type ItemType = {
-  description: string | undefined,
+  itemName: string | undefined,
   price: undefined | number,
-  id: number
+  itemId: number
 }
-type FriendItem = {
-  name : string | undefined,
-  value: number | undefined,
-  id: number
+type Debt = {
+  itemName:  undefined | number | string,
+  itemId: number,
+  debt: undefined | number,
+  includedFriends: number[]
 }
 interface Props {
-  item: ItemType,
-  friendList: FriendItem[]
+  item: ItemType
 }
 </script>
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import useSplit from '@/composables/useSplit'
+import { useFriendsStore } from '@/stores/friends'
+import { useItemsStore } from '@/stores/items'
 
 const props = defineProps<Props>()
 
+const friendsStore = useFriendsStore()
+const friendsList = friendsStore.friendsList
+
+const itemsStore = useItemsStore()
+const changeItemList = itemsStore.changeItemList
+const updateItem = itemsStore.updateItem
+
 const computedDebt = computed(() => {
   if (!props.item.price || !includedFriends.value.length) {
-    return '0'
+    return 0
   }
   
   const split = useSplit({sum: props.item.price, divideBy: includedFriends.value.length})
@@ -76,10 +85,33 @@ const computedDebt = computed(() => {
 const includedFriends = ref<number[]>([])
 const excludedFriends = ref<number[]>([])
 
-watch(props.friendList, () => {
-  const filteredFriends = props.friendList.filter((el) => !excludedFriends.value.includes(el.id))
+watch(friendsList, () => {
+  const filteredFriends = friendsList.filter((el) => !excludedFriends.value.includes(el.id))
   includedFriends.value = filteredFriends.map((el) => el.id)
 }, { immediate: true })
+
+watch(computedDebt, (value) => {
+  updateItem({
+    id: props.item.itemId,
+    debt: value
+  })
+}, {immediate: true})
+
+watch(includedFriends, (value) => {
+  updateItem({
+    id: props.item.itemId,
+    includedFriends: value
+  })
+})
+
+watch(props.item, () => {
+  friendsStore.handleDebt({
+    itemName: props.item.itemName,
+    itemId: props.item.itemId,
+    debt: computedDebt.value,
+    includedFriends: includedFriends.value
+  })
+})
 
 const toggleFriendActivity = function(id: number) {
   if (includedFriends.value.includes(id)) {
@@ -91,16 +123,17 @@ const toggleFriendActivity = function(id: number) {
   }
 }
 
-const emit = defineEmits<{
-  (e: 'deleteItem', id: number): void,
-  (e: 'updateItem', field: string, value: string | number | undefined, id: number): void
-}>()
-
 const deleteItem = () => {
-  emit('deleteItem', props.item.id)
+  changeItemList('remove', props.item.itemId)
 }
-const updateItem = (field: string, value: string | number | undefined) => {
-  emit('updateItem', field, value, props.item.id)
+const updItem = (field: string, value: string | number | undefined) => {
+  updateItem({
+    id: props.item.itemId, 
+    field,
+    value,
+    debt: computedDebt.value,
+    includedFriends: includedFriends.value
+  })
 }
 </script>
 
