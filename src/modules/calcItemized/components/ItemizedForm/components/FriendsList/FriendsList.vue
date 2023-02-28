@@ -34,6 +34,7 @@
             icon="delete-o"
             class="border-none"
             @click="deleteFriend(friend.id)"
+            :disabled="friendsList.length < 2"
           >
           </van-button>
         </van-row>

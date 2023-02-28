@@ -14,7 +14,7 @@
       </thead>
       <tbody>
         <TableItem
-          v-for="item in itemList"
+          v-for="item in debtList"
           :key="item.itemId"
           :item="item"
         >
@@ -22,7 +22,7 @@
       </tbody>
     </table>
     <van-row class="mt-base">
-      <van-button icon="plus" size="mini" @click="changeItemList('add')">Add item</van-button>
+      <van-button icon="plus" size="mini" @click="changeDebtList('add')">Add item</van-button>
     </van-row>
   </van-form>
 </template>
@@ -35,14 +35,12 @@ import TableItem from './components/TableItem/TableItem.vue';
 <script lang="ts" setup>
 import { reactive } from 'vue';
 import { useFriendsStore } from '@/stores/friends';
-import { useItemsStore } from '@/stores/items';
 
 const friendsStore = useFriendsStore()
 const friendsList = friendsStore.friendsList
 
-const itemsStore = useItemsStore()
-const itemList = itemsStore.itemList
-const changeItemList = itemsStore.changeItemList
+const debtList = friendsStore.debtList
+const changeDebtList = friendsStore.changeDebtList
 </script>
 
 <style lang="scss">
