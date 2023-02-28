@@ -1,6 +1,6 @@
 type SplitType = {
   sum: number,
-  divideBy: number,
+  divideBy: number | undefined,
   tip?: number
 }
 export default function useSplit ({sum, divideBy, tip = 0}: SplitType): number {

@@ -33,7 +33,6 @@ import TableItem from './components/TableItem/TableItem.vue';
 </script>
 
 <script lang="ts" setup>
-import { reactive } from 'vue';
 import { useFriendsStore } from '@/stores/friends';
 
 const friendsStore = useFriendsStore()

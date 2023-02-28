@@ -94,15 +94,6 @@ watch(includedFriends, (value) => {
   })
 })
 
-watch(props.item, () => {
-  // friendsStore.handleDebt({
-  //   itemName: props.item.itemName,
-  //   itemId: props.item.itemId,
-  //   debt: computedDebt.value,
-  //   includedFriends: includedFriends.value
-  // })
-})
-
 const toggleFriendActivity = function(id: number) {
   if (includedFriends.value.includes(id)) {
     includedFriends.value = includedFriends.value.filter((el) => el !== id)

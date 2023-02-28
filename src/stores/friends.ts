@@ -92,12 +92,70 @@ export const useFriendsStore = defineStore("friends", () => {
     }
   }
 
+  type SimplifiedDebt = {
+    itemId: number,
+    debt: number,
+    itemName: string | undefined
+  }
+  type friendWithDebt = {
+    name: string | undefined,
+    debts: SimplifiedDebt[]
+  }
+  type FriendsMap = {
+    [key: number]: friendWithDebt
+  }
+  const friendsWithDebts = computed((): FriendsMap => {
+    const map: FriendsMap = {}
+    debtList.forEach((debt) => {
+      const friends = debt.includedFriends
+      friends.forEach((friend) => {
+        const foundFriend = friendsList.find((el) => el.id === friend)
+        let foundFriendName
+        if (foundFriend) foundFriendName = foundFriend.name
+
+        const defaultDebt: SimplifiedDebt = {
+          itemId: debt.itemId,
+          debt: debt.debt,
+          itemName: debt.itemName
+        }
+        if (!map[friend]) {
+          map[friend] = {
+            name: foundFriendName,
+            debts: []
+          }
+          map[friend].debts.push(defaultDebt)
+        } else {
+          let foundItem = map[friend].debts.find((el: SimplifiedDebt) => el.itemId === debt.itemId)
+          if (foundItem) {
+            foundItem = defaultDebt
+          } else {
+            map[friend].debts.push(defaultDebt)
+          }
+        }
+      })
+    })
+    return map
+  })
+
+  const simplifiedDebts = computed(() => {
+    return Object.keys(friendsWithDebts.value).map((key: any) => {
+      const friend = friendsWithDebts.value[key]
+      return {
+        name: friend.name,
+        id: +key,
+        debts: friend.debts.reduce((acc, item) => acc += item.debt, 0)
+      }
+    })
+  })
+
   return {
     friendsList,
     friendsNumber,
     changeFriendsList,
     deleteFriend,
     debtList,
+    friendsWithDebts,
+    simplifiedDebts,
     changeDebtList,
     updateDebtItem
   };

@@ -13,7 +13,7 @@
       <van-button class="mt-base" size="mini" @click="toggleFriends">{{ friendsShown ? 'Hide' : 'Show' }} friends</van-button>
     </van-row>
     <div class="group-wrapper">
-      <div class="mt-base" v-if="friendsShown">
+      <van-form class="mt-base" v-if="friendsShown">
         <van-row 
           v-for="friend in friendsList"
           :key="friend.id"
@@ -23,6 +23,8 @@
         >
           <van-field
             class="friend"
+            required
+            :error="!friend.name"
             left-icon="friends-o"
             right-icon="edit"
             :name="`friend-${friend.name}`"
@@ -38,7 +40,7 @@
           >
           </van-button>
         </van-row>
-      </div>
+      </van-form>
     </div>
   </div>
 </template>
