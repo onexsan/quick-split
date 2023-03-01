@@ -6,6 +6,6 @@ const moduleRoute = {
   component: CalcItemizedView
 };
 
-export default (router) => {
+export default (router: any) => {
   router.addRoute(moduleRoute);
 };
