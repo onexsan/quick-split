@@ -1,25 +1,24 @@
 # Quick Split App
 
+A handy calculator designed to help you and your friends split bills effortlessly.
+
+**Link**: https://onexsan.github.io/quick-split
+
+**Stack**: Vue 3 (Composition API, Pinia), Typescript, Vite, Vant (UI-library)
+
+![image](https://user-images.githubusercontent.com/18422338/222199582-b1ac5a73-1cf3-4818-bf03-c18a347940a7.png)
+
+# Features
+The intuitive user interface of the calculator allows you to enter the bill amount, specify the number of people involved, and quickly calculate the individual amounts each person should pay. You can also add custom tip percentages. 
+In addition to splitting bills by total amount, the calculator also includes an option to split bills per item. This feature allows you to enter each item that was purchased and then allocate it to a specific person. This feature ensures that everyone pays only for what they owe, and that the final bill is split fairly.
+
+# Installation
+
 This template should help get you started developing with Vue 3 in Vite.
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
 
 ## Project Setup
 
