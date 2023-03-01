@@ -1,5 +1,5 @@
 <template>
-  <van-form class="add-item-view">
+  <van-form class="add-item-view d-flex-center">
     <table class="item-table">
       <thead>
         <th>Item</th>
@@ -33,21 +33,18 @@ import TableItem from './components/TableItem/TableItem.vue';
 </script>
 
 <script lang="ts" setup>
-import { useFriendsStore } from '@/stores/friends';
+import { useMainStore } from '@/stores/main';
 
-const friendsStore = useFriendsStore()
-const friendsList = friendsStore.friendsList
+const store = useMainStore()
+const friendsList = store.friendsList
 
-const debtList = friendsStore.debtList
-const changeDebtList = friendsStore.changeDebtList
+const debtList = store.debtList
+const changeDebtList = store.changeDebtList
 </script>
 
 <style lang="scss">
 .add-item-view {
   margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 .item-table {
   th, td {

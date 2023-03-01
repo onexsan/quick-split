@@ -1,6 +1,6 @@
 <template>
-  <div class="friends">
-    <van-row class="friends-wrapper mt-base" justify="center">
+  <div class="friends-block">
+    <van-row class="d-flex-center mt-base" justify="center">
       <p>Friends (max.15)</p>
       <van-stepper
         class="mt-base"
@@ -10,11 +10,12 @@
         @plus="changeFriendsList('add')"
         @minus="changeFriendsList('removeLast')"
       />
-      <van-button class="mt-base" size="mini" @click="toggleFriends">{{ friendsShown ? 'Hide' : 'Show' }} friends</van-button>
+      <van-button class="mt-base" size="mini" @click="toggleFriends">{{ friendsShown ? 'Hide' : 'Edit' }} friends</van-button>
     </van-row>
     <div class="group-wrapper">
-      <van-form class="mt-base" v-if="friendsShown">
-        <van-row 
+      <van-form class="d-flex-center mt-base" v-if="friendsShown">
+        <van-row
+          class="friends-item"
           v-for="friend in friendsList"
           :key="friend.id"
           align="center"
@@ -22,7 +23,7 @@
           :wrap="false"
         >
           <van-field
-            class="friend"
+            class="friends-item__input"
             required
             :error="!friend.name"
             left-icon="friends-o"
@@ -47,10 +48,10 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useFriendsStore } from '@/stores/friends';
+import { useMainStore } from '@/stores/main';
 import { storeToRefs } from "pinia";
 
-const store = useFriendsStore()
+const store = useMainStore()
 const { friendsNumber } = storeToRefs(store);
 
 const friendsList = store.friendsList

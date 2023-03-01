@@ -19,20 +19,16 @@ import DebtList from './components/DebtList/DebtList.vue';
 </script>
 
 <style lang="scss">
-.friends-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
 .show-friends-btn {
   .van-button__icon {
     font-size: 12px;
     margin-top: 3px;
   }
 }
-
-.friend {
+.friends-item {
+  max-width: 300px;
+}
+.friends-item__input {
   .van-cell {
     padding: 8px;
   }

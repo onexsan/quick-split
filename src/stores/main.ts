@@ -1,41 +1,9 @@
-import { ref, reactive, computed, watch } from "vue";
+import { reactive, computed } from "vue";
 import { defineStore } from "pinia";
+import type { Friend, Debt, UpdateDebtObj, SimplifiedDebt, FriendsMap } from './types'
+import { defaultFriend, defaultItem } from './defaults'
 
-// Friends
-type Friend = {
-  name : string | undefined,
-  debts: Debt[],
-  id: number
-}
-const defaultFriend = {
-  name : 'Friend 1',
-  debts: [],
-  id: Date.now()
-}
-// Debts
-type Debt = {
-  itemName: string | undefined,
-  price: number,
-  debt: number,
-  itemId: number,
-  includedFriends: number[]
-}
-type UpdateDebtObj = {
-  id: number,
-  field?: string,
-  value?: string | number | undefined,
-  debt?: number,
-  includedFriends?: number[]
-}
-const defaultItem: Debt = {
-  itemName: '',
-  price: 0,
-  debt: 0,
-  itemId: 0,
-  includedFriends: []
-}
-
-export const useFriendsStore = defineStore("friends", () => {
+export const useMainStore = defineStore("main", () => {
   // Friends
   const friendsList = reactive<Friend[]>([
     defaultFriend
@@ -74,17 +42,22 @@ export const useFriendsStore = defineStore("friends", () => {
   const changeDebtList = function(action: 'add' | 'remove', id?: number) {
     if (action === 'add') {
       debtList.push({
-        ...defaultItem,
-        itemId: Date.now()
+        itemName: `Item ${debtList.length + 1}`,
+        price: 0,
+        debt: 0,
+        itemId: Date.now(),
+        includedFriends: []
       })
     } else if (action === 'remove' && id) {
-      const foundItemIdx = debtList.findIndex((el) => el.itemId === id)
-      debtList.splice(foundItemIdx, 1)
+      if (debtList.length > 1) {
+        const foundItemIdx = debtList.findIndex((el) => el.itemId === id)
+        debtList.splice(foundItemIdx, 1)
+      }
     }
   }
   const updateDebtItem = (obj: UpdateDebtObj) => {
     const {id, field, value, debt, includedFriends} = obj
-    const itemToChange = debtList.find((el) => el.itemId === id)
+    const itemToChange: any = debtList.find((el) => el.itemId === id)
     if (itemToChange) {
       if (field) itemToChange[field] = value
       if (debt !== undefined) itemToChange.debt = debt
@@ -92,20 +65,10 @@ export const useFriendsStore = defineStore("friends", () => {
     }
   }
 
-  type SimplifiedDebt = {
-    itemId: number,
-    debt: number,
-    itemName: string | undefined
-  }
-  type friendWithDebt = {
-    name: string | undefined,
-    debts: SimplifiedDebt[]
-  }
-  type FriendsMap = {
-    [key: number]: friendWithDebt
-  }
+  // Computed lists
   const friendsWithDebts = computed((): FriendsMap => {
     const map: FriendsMap = {}
+
     debtList.forEach((debt) => {
       const friends = debt.includedFriends
       friends.forEach((friend) => {
@@ -121,6 +84,7 @@ export const useFriendsStore = defineStore("friends", () => {
         if (!map[friend]) {
           map[friend] = {
             name: foundFriendName,
+            id: friend,
             debts: []
           }
           map[friend].debts.push(defaultDebt)
@@ -138,15 +102,22 @@ export const useFriendsStore = defineStore("friends", () => {
   })
 
   const simplifiedDebts = computed(() => {
-    return Object.keys(friendsWithDebts.value).map((key: any) => {
-      const friend = friendsWithDebts.value[key]
-      return {
-        name: friend.name,
-        id: +key,
-        debts: friend.debts.reduce((acc, item) => acc += item.debt, 0)
-      }
-    })
+    return Object.keys(friendsWithDebts.value)
+      .map((key: any) => {
+        const friend = friendsWithDebts.value[key]
+        return {
+          name: friend.name,
+          id: +key,
+          debts: friend.debts.reduce((acc, item) => acc += item.debt, 0)
+        }
+      })
+      .filter((el) => el.debts !== 0)
+      .sort((a, b) => a.id - b.id )
   })
+
+  const getFullDebts = (id: number) => {
+    return friendsWithDebts.value[id]
+  }
 
   return {
     friendsList,
@@ -154,9 +125,10 @@ export const useFriendsStore = defineStore("friends", () => {
     changeFriendsList,
     deleteFriend,
     debtList,
+    changeDebtList,
+    updateDebtItem,
     friendsWithDebts,
     simplifiedDebts,
-    changeDebtList,
-    updateDebtItem
+    getFullDebts
   };
 });

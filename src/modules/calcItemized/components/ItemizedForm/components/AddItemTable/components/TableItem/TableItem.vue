@@ -5,6 +5,7 @@
         :modelValue="props.item.itemName"
         @update:modelValue="updItem('itemName', $event)"
         left-icon="cart-o"
+        right-icon="edit"
         placeholder="Name"
       />
     </td>
@@ -35,6 +36,7 @@
         icon="delete-o"
         class="border-none"
         @click="deleteItem"
+        :disabled="debtList.length < 2"
       >
       </van-button>
     </td>
@@ -57,15 +59,16 @@ interface Props {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue'
 import useSplit from '@/composables/useSplit'
-import { useFriendsStore } from '@/stores/friends'
+import { useMainStore } from '@/stores/main'
 
 const props = defineProps<Props>()
 
-const friendsStore = useFriendsStore()
-const friendsList = friendsStore.friendsList
+const store = useMainStore()
+const friendsList = store.friendsList
+const debtList = store.debtList
 
-const changeDebtList = friendsStore.changeDebtList
-const updateDebtItem = friendsStore.updateDebtItem
+const changeDebtList = store.changeDebtList
+const updateDebtItem = store.updateDebtItem
 
 const computedDebt = computed(() => {
   const split = useSplit({sum: props.item.price, divideBy: includedFriends.value.length})
