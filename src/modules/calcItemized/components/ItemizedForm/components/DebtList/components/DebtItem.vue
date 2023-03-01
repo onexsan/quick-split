@@ -1,7 +1,7 @@
 <template>
   <van-collapse-item
     :title="props.friend.name"
-    :value="props.friend.debts"
+    :value="`owes ${props.friend.debts} to ${payer.name}`"
     :name="props.friend.id"
   >
     <ul v-if="fullData">
@@ -28,8 +28,12 @@ interface Props {
 <script lang="ts" setup>
 import { computed } from 'vue';
 import { useMainStore } from '@/stores/main';
+import { storeToRefs } from 'pinia';
 const props = defineProps<Props>()
+
 const store = useMainStore()
+const { payer } = storeToRefs(store)
+
 const getFullDebts = store.getFullDebts
 const fullData = computed(() => {
   return getFullDebts(props.friend.id)

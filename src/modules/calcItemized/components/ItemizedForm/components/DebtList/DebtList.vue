@@ -1,8 +1,13 @@
 <template>
   <van-cell-group class="debtor-list mb-base" inset>
+    <van-cell
+      v-if="paidSum && returnSum"
+      :title="`${payer.name} paid ${paidSum} and gets back ${returnSum}`"
+    >
+    </van-cell>
     <van-collapse v-model="accordion" accordion>
       <DebtItem
-        v-for="friend in friends"
+        v-for="friend in simplifiedDebts"
         :key="friend.id"
         :friend="friend"
       />
@@ -17,15 +22,14 @@ import { storeToRefs } from "pinia";
 import DebtItem from './components/DebtItem.vue';
 
 const store = useMainStore()
-const { simplifiedDebts } = storeToRefs(store)
-const friends = simplifiedDebts
+const { simplifiedDebts, payer, paidSum, returnSum } = storeToRefs(store)
 
 const accordion = ref('accordion')
 </script>
 
 <style lang="scss" scoped>
 .debtor-list {
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 }
 </style>

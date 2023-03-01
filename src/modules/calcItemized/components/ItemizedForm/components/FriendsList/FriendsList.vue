@@ -1,7 +1,7 @@
 <template>
   <div class="friends-block">
     <van-row class="d-flex-center mt-base" justify="center">
-      <p>Friends (max.15)</p>
+      <p>Friends</p>
       <van-stepper
         class="mt-base"
         max="15"
@@ -10,6 +10,7 @@
         @plus="changeFriendsList('add')"
         @minus="changeFriendsList('removeLast')"
       />
+      <PayerSelector class="mt-base" />
       <van-button class="mt-base" size="mini" @click="toggleFriends">{{ friendsShown ? 'Hide' : 'Edit' }} friends</van-button>
     </van-row>
     <div class="group-wrapper">
@@ -50,6 +51,7 @@
 import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
 import { storeToRefs } from "pinia";
+import PayerSelector from '../PayerSelector/PayerSelector.vue';
 
 const store = useMainStore()
 const { friendsNumber } = storeToRefs(store);

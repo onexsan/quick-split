@@ -65,10 +65,10 @@ const props = defineProps<Props>()
 
 const store = useMainStore()
 const friendsList = store.friendsList
-const debtList = store.debtList
+const debtList = store.itemList
 
-const changeDebtList = store.changeDebtList
-const updateDebtItem = store.updateDebtItem
+const changeItemList = store.changeItemList
+const updateItem = store.updateItem
 
 const computedDebt = computed(() => {
   const split = useSplit({sum: props.item.price, divideBy: includedFriends.value.length})
@@ -84,14 +84,14 @@ watch(friendsList, () => {
 }, { immediate: true })
 
 watch(computedDebt, (value) => {
-  updateDebtItem({
+  updateItem({
     id: props.item.itemId,
     debt: value
   })
 }, {immediate: true})
 
 watch(includedFriends, (value) => {
-  updateDebtItem({
+  updateItem({
     id: props.item.itemId,
     includedFriends: value
   })
@@ -108,10 +108,10 @@ const toggleFriendActivity = function(id: number) {
 }
 
 const deleteItem = () => {
-  changeDebtList('remove', props.item.itemId)
+  changeItemList('remove', props.item.itemId)
 }
 const updItem = (field: string, value: string | number | undefined) => {
-  updateDebtItem({
+  updateItem({
     id: props.item.itemId, 
     field,
     value,

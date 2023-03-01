@@ -76,6 +76,11 @@ a {
   }
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 600000s 0s, color 600000s 0s;
+}
+
 .translucent {
   color: var(--translucent-white);
 }
@@ -104,4 +109,7 @@ a {
 }
 .mb-base {
   margin-bottom: var(--space-base);
+}
+.mr-sm {
+  margin-right: var(--space-sm);
 }

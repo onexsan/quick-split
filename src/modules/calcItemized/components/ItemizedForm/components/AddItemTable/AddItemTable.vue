@@ -22,7 +22,7 @@
       </tbody>
     </table>
     <van-row class="mt-base">
-      <van-button icon="plus" size="mini" @click="changeDebtList('add')">Add item</van-button>
+      <van-button icon="plus" size="mini" @click="changeItemList('add')">Add item</van-button>
     </van-row>
   </van-form>
 </template>
@@ -38,8 +38,8 @@ import { useMainStore } from '@/stores/main';
 const store = useMainStore()
 const friendsList = store.friendsList
 
-const debtList = store.debtList
-const changeDebtList = store.changeDebtList
+const debtList = store.itemList
+const changeItemList = store.changeItemList
 </script>
 
 <style lang="scss">

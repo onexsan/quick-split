@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import {
+  Locale,
   Button,
   Form,
   Field,
@@ -15,6 +16,8 @@ import {
   CollapseItem,
   Popup
 } from 'vant';
+import enUS from 'vant/es/locale/lang/en-US';
+
 import 'vant/lib/index.css';
 
 import App from "./App.vue";
@@ -37,6 +40,7 @@ registerModules({
 app.use(createPinia());
 app.use(router);
 
+Locale.use('en-US', enUS);
 app.use(Button)
 app.use(Form);
 app.use(Field);

@@ -13,8 +13,8 @@
 </template>
 
 <script lang="ts" setup>
-import AddItemTable from './components/AddItemTable/AddItemTable.vue';
 import FriendsList from './components/FriendsList/FriendsList.vue';
+import AddItemTable from './components/AddItemTable/AddItemTable.vue';
 import DebtList from './components/DebtList/DebtList.vue';
 </script>
 

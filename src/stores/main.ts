@@ -1,4 +1,4 @@
-import { reactive, computed } from "vue";
+import { ref, reactive, computed } from "vue";
 import { defineStore } from "pinia";
 import type { Friend, Debt, UpdateDebtObj, SimplifiedDebt, FriendsMap } from './types'
 import { defaultFriend, defaultItem } from './defaults'
@@ -32,32 +32,54 @@ export const useMainStore = defineStore("main", () => {
     }
   }
 
+  // Payer
+  const payer = ref<Friend>(friendsList[0])
+
+  const updatePayer = (id: number) => {
+    const foundFriend = friendsList.find((el) => el.id === id)
+    payer.value = foundFriend as Friend
+  }
+
+  const paidSum = computed(() => {
+    return itemList.reduce((acc, item) => {
+      return acc += item.price
+    }, 0)
+  })
+
+  const returnSum = computed(() => {
+    if (!simplifiedDebts.value.length) return 0
+    const debtSum = simplifiedDebts.value.reduce((acc, item) => {
+      return acc += item.debts
+    }, 0)
+    return debtSum
+  })
+
   // Debts
-  const debtList = reactive<Debt[]>([
+  const itemList = reactive<Debt[]>([
     {
       ...defaultItem,
       itemId: Date.now()
     }
   ])
-  const changeDebtList = function(action: 'add' | 'remove', id?: number) {
+  const changeItemList = function(action: 'add' | 'remove', id?: number) {
     if (action === 'add') {
-      debtList.push({
-        itemName: `Item ${debtList.length + 1}`,
+      itemList.push({
+        itemName: `Item ${itemList.length + 1}`,
         price: 0,
         debt: 0,
         itemId: Date.now(),
         includedFriends: []
       })
     } else if (action === 'remove' && id) {
-      if (debtList.length > 1) {
-        const foundItemIdx = debtList.findIndex((el) => el.itemId === id)
-        debtList.splice(foundItemIdx, 1)
+      if (itemList.length > 1) {
+        const foundItemIdx = itemList.findIndex((el) => el.itemId === id)
+        itemList.splice(foundItemIdx, 1)
       }
     }
   }
-  const updateDebtItem = (obj: UpdateDebtObj) => {
+  const updateItem = (obj: UpdateDebtObj) => {
     const {id, field, value, debt, includedFriends} = obj
-    const itemToChange: any = debtList.find((el) => el.itemId === id)
+    const itemToChange: any = itemList.find((el) => el.itemId === id)
     if (itemToChange) {
       if (field) itemToChange[field] = value
       if (debt !== undefined) itemToChange.debt = debt
@@ -69,7 +91,7 @@ export const useMainStore = defineStore("main", () => {
   const friendsWithDebts = computed((): FriendsMap => {
     const map: FriendsMap = {}
 
-    debtList.forEach((debt) => {
+    itemList.forEach((debt) => {
       const friends = debt.includedFriends
       friends.forEach((friend) => {
         const foundFriend = friendsList.find((el) => el.id === friend)
@@ -111,8 +133,7 @@ export const useMainStore = defineStore("main", () => {
           debts: friend.debts.reduce((acc, item) => acc += item.debt, 0)
         }
       })
-      .filter((el) => el.debts !== 0)
-      .sort((a, b) => a.id - b.id )
+      .filter((el) => el.debts !== 0 && el.id !== payer.value.id)
   })
 
   const getFullDebts = (id: number) => {
@@ -124,9 +145,13 @@ export const useMainStore = defineStore("main", () => {
     friendsNumber,
     changeFriendsList,
     deleteFriend,
-    debtList,
-    changeDebtList,
-    updateDebtItem,
+    payer,
+    paidSum,
+    returnSum,
+    updatePayer,
+    itemList,
+    changeItemList,
+    updateItem,
     friendsWithDebts,
     simplifiedDebts,
     getFullDebts
