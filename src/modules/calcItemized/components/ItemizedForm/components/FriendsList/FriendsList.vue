@@ -51,15 +51,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useMainStore } from '@/stores/main';
+import { useFriendsStore } from '@/stores/friends';
 import { storeToRefs } from 'pinia';
 import PayerSelector from '../PayerSelector/PayerSelector.vue';
 
-const store = useMainStore();
-const { friendsNumber } = storeToRefs(store);
+const friendsStore = useFriendsStore();
+const { friendsNumber } = storeToRefs(friendsStore);
 
-const friendsList = store.friendsList;
-const changeFriendsList = store.changeFriendsList;
+const friendsList = friendsStore.friendsList;
+const changeFriendsList = friendsStore.changeFriendsList;
 
 const friendsShown = ref(false);
 const toggleFriends = () => {
@@ -67,6 +67,6 @@ const toggleFriends = () => {
 };
 
 const deleteFriend = (id: number) => {
-  store.deleteFriend(id);
+  friendsStore.deleteFriend(id);
 };
 </script>

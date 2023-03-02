@@ -24,14 +24,16 @@ interface Props {
 </script>
 <script lang="ts" setup>
 import { computed } from 'vue';
-import { useMainStore } from '@/stores/main';
+import { usePayerStore } from '@/stores/payer';
+import { useDebtsStore } from '@/stores/debts';
 import { storeToRefs } from 'pinia';
 const props = defineProps<Props>();
 
-const store = useMainStore();
-const { payer } = storeToRefs(store);
+const payerStore = usePayerStore();
+const { payer } = storeToRefs(payerStore);
 
-const getFullDebts = store.getFullDebts;
+const debtsStore = useDebtsStore();
+const getFullDebts = debtsStore.getFullDebts;
 const fullData = computed(() => {
   return getFullDebts(props.friend.id);
 });

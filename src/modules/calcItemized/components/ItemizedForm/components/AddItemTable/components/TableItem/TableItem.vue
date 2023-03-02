@@ -33,7 +33,7 @@
         icon="delete-o"
         class="border-none"
         @click="deleteItem"
-        :disabled="debtList.length < 2"
+        :disabled="itemList.length < 2"
       >
       </van-button>
     </td>
@@ -56,16 +56,18 @@ interface Props {
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
 import useSplit from '@/composables/useSplit';
-import { useMainStore } from '@/stores/main';
+import { useFriendsStore } from '@/stores/friends';
+import { useItemsStore } from '@/stores/items';
 
 const props = defineProps<Props>();
 
-const store = useMainStore();
-const friendsList = store.friendsList;
-const debtList = store.itemList;
+const friendsStore = useFriendsStore();
+const friendsList = friendsStore.friendsList;
 
-const changeItemList = store.changeItemList;
-const updateItem = store.updateItem;
+const itemsStore = useItemsStore();
+const itemList = itemsStore.itemList;
+const changeItemList = itemsStore.changeItemList;
+const updateItem = itemsStore.updateItem;
 
 const computedDebt = computed(() => {
   const split = useSplit({

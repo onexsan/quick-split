@@ -17,12 +17,15 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import { useMainStore } from '@/stores/main';
+import { usePayerStore } from '@/stores/payer';
+import { useDebtsStore } from '@/stores/debts';
 import { storeToRefs } from 'pinia';
 import DebtItem from './components/DebtItem.vue';
 
-const store = useMainStore();
-const { simplifiedDebts, payer, paidSum, returnSum } = storeToRefs(store);
+const payerStore = usePayerStore();
+const debtsStore = useDebtsStore();
+const { payer, paidSum, returnSum } = storeToRefs(payerStore);
+const { simplifiedDebts } = storeToRefs(debtsStore);
 
 const accordion = ref('accordion');
 </script>

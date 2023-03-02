@@ -13,13 +13,16 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, watch } from 'vue';
-import { useMainStore } from '@/stores/main';
+import { useFriendsStore } from '@/stores/friends';
+import { usePayerStore } from '@/stores/payer';
 import { storeToRefs } from 'pinia';
 
-const store = useMainStore();
-const friendsList = store.friendsList;
-const { payer } = storeToRefs(store);
-const updatePayer = store.updatePayer;
+const friendsStore = useFriendsStore();
+const friendsList = friendsStore.friendsList;
+
+const payerStore = usePayerStore();
+const { payer } = storeToRefs(payerStore);
+const updatePayer = payerStore.updatePayer;
 
 const payerId = ref<number | null>(null);
 watch(payerId, value => {

@@ -10,7 +10,7 @@
         <th></th>
       </thead>
       <tbody>
-        <TableItem v-for="item in debtList" :key="item.itemId" :item="item">
+        <TableItem v-for="item in itemList" :key="item.itemId" :item="item">
         </TableItem>
       </tbody>
     </table>
@@ -27,13 +27,15 @@ import TableItem from './components/TableItem/TableItem.vue';
 </script>
 
 <script lang="ts" setup>
-import { useMainStore } from '@/stores/main';
+import { useFriendsStore } from '@/stores/friends';
+import { useItemsStore } from '@/stores/items';
 
-const store = useMainStore();
-const friendsList = store.friendsList;
+const friendsStore = useFriendsStore();
+const friendsList = friendsStore.friendsList;
 
-const debtList = store.itemList;
-const changeItemList = store.changeItemList;
+const itemsStore = useItemsStore();
+const itemList = itemsStore.itemList;
+const changeItemList = itemsStore.changeItemList;
 </script>
 
 <style lang="scss">
