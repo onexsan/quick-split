@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { computed } from "vue";
-import { RouterView, useRoute } from "vue-router";
-import AppHeader from '@/components/common/header'
+import { computed } from 'vue';
+import { RouterView, useRoute } from 'vue-router';
+import AppHeader from '@/components/common/header';
 
-const route = useRoute()
+const route = useRoute();
 const isItemized = computed(() => {
-  return route.name === 'CalcItemizedView'
-})
+  return route.name === 'CalcItemizedView';
+});
 </script>
 
 <template>
@@ -15,4 +15,3 @@ const isItemized = computed(() => {
     <RouterView />
   </van-config-provider>
 </template>
-

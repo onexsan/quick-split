@@ -1,3 +1,3 @@
-import component from './AddItemTable.vue'
+import component from './AddItemTable.vue';
 
-export default component
+export default component;

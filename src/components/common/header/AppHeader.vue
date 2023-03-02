@@ -10,9 +10,7 @@
         />
       </van-col>
       <van-col class="align-center justify-center" span="8">
-        <RouterLink class="logo" to="/">
-          Quick Split
-        </RouterLink>
+        <RouterLink class="logo" to="/"> Quick Split </RouterLink>
       </van-col>
     </van-row>
   </header>
@@ -23,9 +21,9 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const showBackBtn = computed(() => {
-  const route = useRoute()
-  return !!(route.name !== 'Home')
-})
+  const route = useRoute();
+  return !!(route.name !== 'Home');
+});
 </script>
 
 <style lang="scss" scoped>

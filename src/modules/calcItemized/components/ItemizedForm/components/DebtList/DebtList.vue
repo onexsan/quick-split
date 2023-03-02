@@ -18,13 +18,13 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import { useMainStore } from '@/stores/main';
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia';
 import DebtItem from './components/DebtItem.vue';
 
-const store = useMainStore()
-const { simplifiedDebts, payer, paidSum, returnSum } = storeToRefs(store)
+const store = useMainStore();
+const { simplifiedDebts, payer, paidSum, returnSum } = storeToRefs(store);
 
-const accordion = ref('accordion')
+const accordion = ref('accordion');
 </script>
 
 <style lang="scss" scoped>

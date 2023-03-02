@@ -1,3 +1,3 @@
-import component from './PayerSelector.vue'
+import component from './PayerSelector.vue';
 
-export default component
+export default component;

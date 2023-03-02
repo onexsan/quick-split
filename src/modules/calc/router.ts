@@ -1,9 +1,9 @@
-const CalcView = () => import("./views/CalcView.vue");
+const CalcView = () => import('./views/CalcView.vue');
 
 const moduleRoute = {
-  path: "/",
+  path: '/',
   name: 'Home',
-  component: CalcView
+  component: CalcView,
 };
 
 export default (router: any) => {

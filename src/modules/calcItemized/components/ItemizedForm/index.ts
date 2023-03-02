@@ -1,3 +1,3 @@
-import component from './ItemizedForm.vue'
+import component from './ItemizedForm.vue';
 
-export default component
+export default component;

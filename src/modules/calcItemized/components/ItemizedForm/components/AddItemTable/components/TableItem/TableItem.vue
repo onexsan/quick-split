@@ -17,10 +17,7 @@
         placeholder="Price"
       />
     </td>
-    <td
-      v-for="friend in friendsList"
-      :key="friend.id"
-    >
+    <td v-for="friend in friendsList" :key="friend.id">
       <van-button
         :type="includedFriends.includes(friend.id) ? 'primary' : 'default'"
         size="mini"
@@ -45,80 +42,93 @@
 
 <script lang="ts">
 type Debt = {
-  itemName: string | undefined,
-  price: number,
-  debt: number,
-  itemId: number,
-  includedFriends: number[]
-}
+  itemName: string | undefined;
+  price: number;
+  debt: number;
+  itemId: number;
+  includedFriends: number[];
+};
 interface Props {
-  item: Debt
+  item: Debt;
 }
 </script>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from 'vue'
-import useSplit from '@/composables/useSplit'
-import { useMainStore } from '@/stores/main'
+import { computed, ref, watch } from 'vue';
+import useSplit from '@/composables/useSplit';
+import { useMainStore } from '@/stores/main';
 
-const props = defineProps<Props>()
+const props = defineProps<Props>();
 
-const store = useMainStore()
-const friendsList = store.friendsList
-const debtList = store.itemList
+const store = useMainStore();
+const friendsList = store.friendsList;
+const debtList = store.itemList;
 
-const changeItemList = store.changeItemList
-const updateItem = store.updateItem
+const changeItemList = store.changeItemList;
+const updateItem = store.updateItem;
 
 const computedDebt = computed(() => {
-  const split = useSplit({sum: props.item.price, divideBy: includedFriends.value.length})
-  return split
-})
+  const split = useSplit({
+    sum: props.item.price,
+    divideBy: includedFriends.value.length,
+  });
+  return split;
+});
 
-const includedFriends = ref<number[]>([])
-const excludedFriends = ref<number[]>([])
+const includedFriends = ref<number[]>([]);
+const excludedFriends = ref<number[]>([]);
 
-watch(friendsList, () => {
-  const filteredFriends = friendsList.filter((el) => !excludedFriends.value.includes(el.id))
-  includedFriends.value = filteredFriends.map((el) => el.id)
-}, { immediate: true })
+watch(
+  friendsList,
+  () => {
+    const filteredFriends = friendsList.filter(
+      el => !excludedFriends.value.includes(el.id)
+    );
+    includedFriends.value = filteredFriends.map(el => el.id);
+  },
+  { immediate: true }
+);
 
-watch(computedDebt, (value) => {
+watch(
+  computedDebt,
+  value => {
+    updateItem({
+      id: props.item.itemId,
+      debt: value,
+    });
+  },
+  { immediate: true }
+);
+
+watch(includedFriends, value => {
   updateItem({
     id: props.item.itemId,
-    debt: value
-  })
-}, {immediate: true})
+    includedFriends: value,
+  });
+});
 
-watch(includedFriends, (value) => {
-  updateItem({
-    id: props.item.itemId,
-    includedFriends: value
-  })
-})
-
-const toggleFriendActivity = function(id: number) {
+const toggleFriendActivity = function (id: number) {
   if (includedFriends.value.includes(id)) {
-    includedFriends.value = includedFriends.value.filter((el) => el !== id)
-    excludedFriends.value.push(id)
+    includedFriends.value = includedFriends.value.filter(el => el !== id);
+    excludedFriends.value.push(id);
   } else {
-    includedFriends.value.push(id)
-    excludedFriends.value = excludedFriends.value.filter((el) => el === id)
+    includedFriends.value.push(id);
+    excludedFriends.value = excludedFriends.value.filter(el => el === id);
   }
-}
+};
 
 const deleteItem = () => {
-  changeItemList('remove', props.item.itemId)
-}
+  changeItemList('remove', props.item.itemId);
+};
 const updItem = (field: string, value: string | number | undefined) => {
   updateItem({
-    id: props.item.itemId, 
+    id: props.item.itemId,
     field,
     value,
     debt: computedDebt.value,
-    includedFriends: includedFriends.value
-  })
-}
+    includedFriends: includedFriends.value,
+  });
+};
 </script>
 
 <style lang="scss" scoped>

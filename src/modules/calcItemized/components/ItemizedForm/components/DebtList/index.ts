@@ -1,3 +1,3 @@
-import component from "./DebtList.vue";
+import component from './DebtList.vue';
 
-export default component
+export default component;

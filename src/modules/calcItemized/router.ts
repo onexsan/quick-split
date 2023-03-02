@@ -1,9 +1,9 @@
-const CalcItemizedView = () => import("./views/CalcItemizedView.vue");
+const CalcItemizedView = () => import('./views/CalcItemizedView.vue');
 
 const moduleRoute = {
-  path: "/itemized",
+  path: '/itemized',
   name: 'CalcItemizedView',
-  component: CalcItemizedView
+  component: CalcItemizedView,
 };
 
 export default (router: any) => {

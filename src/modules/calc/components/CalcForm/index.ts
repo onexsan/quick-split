@@ -1,3 +1,3 @@
-import component from './CalcForm.vue'
+import component from './CalcForm.vue';
 
-export default component
+export default component;

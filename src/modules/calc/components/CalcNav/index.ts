@@ -1,3 +1,3 @@
-import component from './CalcNav.vue'
+import component from './CalcNav.vue';
 
-export default component
+export default component;

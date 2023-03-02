@@ -1,10 +1,10 @@
 :root {
   --bg-main: #000000;
   --bg-dark: #1f2122;
-  --text-white: rgba(255, 255, 255, 0.8);;
+  --text-white: rgba(255, 255, 255, 0.8);
   --translucent-white: rgba(255, 255, 255, 0.5);
-  --primary: #F5A623;
-  --negative: #C22F00;
+  --primary: #f5a623;
+  --negative: #c22f00;
   --space-base: 16px;
   --border-radius: 4px;
   --space-sm: 12px;
@@ -14,11 +14,10 @@
 
 // Override Vant variables
 :root:root {
-  --van-button-primary-color: #FFFFFF;
-  --van-button-primary-background: #F5A623;
-  --van-button-primary-border-color: #F5A623;
+  --van-button-primary-color: #ffffff;
+  --van-button-primary-background: #f5a623;
+  --van-button-primary-border-color: #f5a623;
 }
-
 
 *,
 *::before,

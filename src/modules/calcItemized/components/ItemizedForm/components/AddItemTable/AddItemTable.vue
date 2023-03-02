@@ -4,42 +4,36 @@
       <thead>
         <th>Item</th>
         <th>Price</th>
-        <th
-          v-for="friend in friendsList"
-          :key="friend.id"
-        >
+        <th v-for="friend in friendsList" :key="friend.id">
           {{ friend.name }}
         </th>
         <th></th>
       </thead>
       <tbody>
-        <TableItem
-          v-for="item in debtList"
-          :key="item.itemId"
-          :item="item"
-        >
+        <TableItem v-for="item in debtList" :key="item.itemId" :item="item">
         </TableItem>
       </tbody>
     </table>
     <van-row class="mt-base">
-      <van-button icon="plus" size="mini" @click="changeItemList('add')">Add item</van-button>
+      <van-button icon="plus" size="mini" @click="changeItemList('add')"
+        >Add item</van-button
+      >
     </van-row>
   </van-form>
 </template>
 
 <script lang="ts">
 import TableItem from './components/TableItem/TableItem.vue';
-
 </script>
 
 <script lang="ts" setup>
 import { useMainStore } from '@/stores/main';
 
-const store = useMainStore()
-const friendsList = store.friendsList
+const store = useMainStore();
+const friendsList = store.friendsList;
 
-const debtList = store.itemList
-const changeItemList = store.changeItemList
+const debtList = store.itemList;
+const changeItemList = store.changeItemList;
 </script>
 
 <style lang="scss">
@@ -47,11 +41,13 @@ const changeItemList = store.changeItemList
   margin: 0 auto;
 }
 .item-table {
-  th, td {
+  th,
+  td {
     font-size: 10px;
   }
 
-  th, td {
+  th,
+  td {
     text-align: center;
     &:first-child {
       max-width: 25%;

@@ -1,6 +1,6 @@
 <template>
-  <CalcForm/>
-  <CalcNav/>
+  <CalcForm />
+  <CalcNav />
 </template>
 
 <script lang="ts" setup>

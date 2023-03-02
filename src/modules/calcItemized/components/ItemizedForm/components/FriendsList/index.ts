@@ -1,3 +1,3 @@
-import component from './FriendsList.vue'
+import component from './FriendsList.vue';
 
-export default component
+export default component;

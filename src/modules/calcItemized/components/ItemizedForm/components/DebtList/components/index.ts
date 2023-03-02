@@ -1,3 +1,3 @@
-import component from "./DebtItem.vue";
+import component from './DebtItem.vue';
 
-export default component
+export default component;

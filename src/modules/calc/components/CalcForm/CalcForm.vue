@@ -48,11 +48,19 @@
         Calculate
       </van-button>
       <template v-if="result">
-        <br/>
+        <br />
         <van-cell-group inset>
-          <van-field v-model="result" readonly center label="Result" placeholder="Result">
+          <van-field
+            v-model="result"
+            readonly
+            center
+            label="Result"
+            placeholder="Result"
+          >
             <template #button>
-              <van-button size="small" type="primary" @click="copyToClipboard">Copy</van-button>
+              <van-button size="small" type="primary" @click="copyToClipboard"
+                >Copy</van-button
+              >
             </template>
           </van-field>
         </van-cell-group>
@@ -63,23 +71,27 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import useSplit from '@/composables/useSplit'
+import useSplit from '@/composables/useSplit';
 
 const sum = ref<number | undefined>(undefined);
 const friends = ref<number | undefined>(undefined);
 const tip = ref<number | undefined>(undefined);
 const includeTip = ref<boolean>(false);
-const tipFormatter = (value: number | string) => value ? `${value}%` : ''
-const result = ref<number | null>(null)
+const tipFormatter = (value: number | string) => (value ? `${value}%` : '');
+const result = ref<number | null>(null);
 
 const onSubmit = () => {
   if (sum.value && friends.value) {
-    const split = useSplit({sum: sum.value, divideBy: friends.value, tip: tip.value})
-    result.value = split
+    const split = useSplit({
+      sum: sum.value,
+      divideBy: friends.value,
+      tip: tip.value,
+    });
+    result.value = split;
   }
 };
 
 const copyToClipboard = () => {
-  navigator.clipboard.writeText(`${result.value} per person`)
-}
+  navigator.clipboard.writeText(`${result.value} per person`);
+};
 </script>

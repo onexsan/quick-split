@@ -18,7 +18,8 @@
     }
   }
 }
-.van-cell-group--inset, .group-wrapper {
+.van-cell-group--inset,
+.group-wrapper {
   @media all and (max-width: 480px) {
     margin-left: 0;
     margin-right: 0;

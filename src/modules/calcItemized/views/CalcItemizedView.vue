@@ -1,5 +1,5 @@
 <template>
-  <ItemizedForm/>
+  <ItemizedForm />
 </template>
 
 <script lang="ts" setup>

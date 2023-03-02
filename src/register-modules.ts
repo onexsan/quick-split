@@ -1,10 +1,10 @@
-import router from "./router";
+import router from './router';
 
 interface ModuleType {
   router: (router: any) => void;
 }
 interface Module {
-  [key: string]: ModuleType
+  [key: string]: ModuleType;
 }
 
 const registerModule = (module: ModuleType) => {
@@ -14,7 +14,7 @@ const registerModule = (module: ModuleType) => {
 };
 
 export const registerModules = (modules: Module) => {
-  Object.values(modules).forEach((module) => {
+  Object.values(modules).forEach(module => {
     registerModule(module);
   });
 };
