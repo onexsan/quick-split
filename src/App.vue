@@ -3,9 +3,8 @@ import { computed } from 'vue';
 import { RouterView, useRoute } from 'vue-router';
 import AppHeader from '@/components/common/header';
 
-const route = useRoute();
 const isItemized = computed(() => {
-  return route.name === 'CalcItemizedView';
+  return useRoute().name === 'CalcItemizedView';
 });
 </script>
 

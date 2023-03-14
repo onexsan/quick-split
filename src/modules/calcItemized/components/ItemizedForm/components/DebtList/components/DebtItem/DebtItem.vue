@@ -29,8 +29,7 @@ const payerStore = usePayerStore();
 const { payer } = storeToRefs(payerStore);
 
 const debtsStore = useDebtsStore();
-const getFullDebts = debtsStore.getFullDebts;
 const fullData = computed(() => {
-  return getFullDebts(props.friend.itemId);
+  return debtsStore.getFullDebts(props.friend.itemId);
 });
 </script>

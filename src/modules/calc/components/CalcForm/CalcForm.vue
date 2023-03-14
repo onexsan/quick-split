@@ -82,12 +82,11 @@ const result = ref<number | null>(null);
 
 const onSubmit = () => {
   if (sum.value && friends.value) {
-    const split = useSplit({
+    result.value = useSplit({
       sum: sum.value,
       divideBy: friends.value,
       tip: tip.value,
     });
-    result.value = split;
   }
 };
 

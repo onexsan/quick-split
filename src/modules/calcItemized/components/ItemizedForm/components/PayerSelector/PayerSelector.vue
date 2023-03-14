@@ -22,12 +22,11 @@ const friendsList = friendsStore.friendsList;
 
 const payerStore = usePayerStore();
 const { payer } = storeToRefs(payerStore);
-const updatePayer = payerStore.updatePayer;
 
 const payerId = ref<number | null>(null);
 watch(payerId, value => {
   if (value) {
-    updatePayer(value);
+    payerStore.updatePayer(value);
   }
 });
 onMounted(() => {

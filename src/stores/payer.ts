@@ -25,13 +25,12 @@ export const usePayerStore = defineStore('payer', () => {
 
   const returnSum = computed(() => {
     if (!debtsStore.simplifiedDebts.length) return 0;
-    const debtSum = debtsStore.simplifiedDebts.reduce(
+    return debtsStore.simplifiedDebts.reduce(
       (acc: number, item: SimplifiedDebt) => {
         return (acc += item.debt);
       },
       0
     );
-    return debtSum;
   });
 
   return {

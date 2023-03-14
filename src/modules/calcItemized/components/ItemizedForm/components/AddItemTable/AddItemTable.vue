@@ -22,13 +22,10 @@
   </van-form>
 </template>
 
-<script lang="ts">
-import TableItem from './components/TableItem/TableItem.vue';
-</script>
-
 <script lang="ts" setup>
 import { useFriendsStore } from '@/stores/friends';
 import { useItemsStore } from '@/stores/items';
+import TableItem from './components/TableItem/TableItem.vue';
 
 const friendsStore = useFriendsStore();
 const friendsList = friendsStore.friendsList;

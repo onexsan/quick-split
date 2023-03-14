@@ -41,13 +41,7 @@
 </template>
 
 <script lang="ts">
-type Debt = {
-  itemName: string;
-  price: number;
-  debt: number;
-  itemId: number;
-  includedFriends: number[];
-};
+import type { Debt } from '@/stores/types';
 interface Props {
   item: Debt;
 }
@@ -70,11 +64,10 @@ const changeItemList = itemsStore.changeItemList;
 const updateItem = itemsStore.updateItem;
 
 const computedDebt = computed(() => {
-  const split = useSplit({
-    sum: props.item.price,
+  return useSplit({
+    sum: +props.item.price,
     divideBy: includedFriends.value.length,
   });
-  return split;
 });
 
 const includedFriends = ref<number[]>([]);
@@ -83,10 +76,9 @@ const excludedFriends = ref<number[]>([]);
 watch(
   friendsList,
   () => {
-    const filteredFriends = friendsList.filter(
+    includedFriends.value = friendsList.filter(
       el => !excludedFriends.value.includes(el.id)
-    );
-    includedFriends.value = filteredFriends.map(el => el.id);
+    ).map(el => el.id);
   },
   { immediate: true }
 );

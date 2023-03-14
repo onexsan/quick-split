@@ -21,8 +21,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 const showBackBtn = computed(() => {
-  const route = useRoute();
-  return !!(route.name !== 'Home');
+  return useRoute().name !== 'Home'
 });
 </script>
 
