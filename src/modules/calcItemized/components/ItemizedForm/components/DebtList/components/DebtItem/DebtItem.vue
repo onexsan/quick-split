@@ -1,8 +1,8 @@
 <template>
   <van-collapse-item
-    :title="props.friend.name"
-    :value="`owes ${props.friend.debts} to ${payer.name}`"
-    :name="props.friend.id"
+    :title="props.friend.itemName"
+    :value="`owes ${props.friend.debt} to ${payer.name}`"
+    :name="props.friend.itemId"
   >
     <ul v-if="fullData">
       <li v-for="item in fullData.debts" :key="item.itemId">
@@ -13,13 +13,9 @@
 </template>
 
 <script lang="ts">
-type Friend = {
-  name: string | undefined;
-  debts: number;
-  id: number;
-};
+import type { SimplifiedDebt } from '@/stores/types'
 interface Props {
-  friend: Friend;
+  friend: SimplifiedDebt;
 }
 </script>
 <script lang="ts" setup>
@@ -35,6 +31,6 @@ const { payer } = storeToRefs(payerStore);
 const debtsStore = useDebtsStore();
 const getFullDebts = debtsStore.getFullDebts;
 const fullData = computed(() => {
-  return getFullDebts(props.friend.id);
+  return getFullDebts(props.friend.itemId);
 });
 </script>

@@ -28,9 +28,9 @@ export const useItemsStore = defineStore('items', () => {
   };
   const updateItem = (obj: UpdateDebtObj) => {
     const { id, field, value, debt, includedFriends } = obj;
-    const itemToChange: any = itemList.find(el => el.itemId === id);
+    const itemToChange: Debt | undefined = itemList.find(el => el.itemId === id);
     if (itemToChange) {
-      if (field) itemToChange[field] = value;
+      if (field && value) itemToChange[field] = value;
       if (debt !== undefined) itemToChange.debt = debt;
       if (includedFriends) itemToChange.includedFriends = includedFriends;
     }

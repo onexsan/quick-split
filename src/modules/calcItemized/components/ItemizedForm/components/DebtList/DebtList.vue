@@ -8,7 +8,7 @@
     <van-collapse v-model="accordion" accordion>
       <DebtItem
         v-for="friend in simplifiedDebts"
-        :key="friend.id"
+        :key="friend.itemId"
         :friend="friend"
       />
     </van-collapse>
@@ -20,7 +20,7 @@ import { ref } from 'vue';
 import { usePayerStore } from '@/stores/payer';
 import { useDebtsStore } from '@/stores/debts';
 import { storeToRefs } from 'pinia';
-import DebtItem from './components/DebtItem.vue';
+import DebtItem from './components/DebtItem';
 
 const payerStore = usePayerStore();
 const debtsStore = useDebtsStore();

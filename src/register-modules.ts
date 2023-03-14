@@ -1,7 +1,8 @@
 import router from './router';
+import type { Router } from 'vue-router'
 
 interface ModuleType {
-  router: (router: any) => void;
+  router: (router: Router) => void;
 }
 interface Module {
   [key: string]: ModuleType;

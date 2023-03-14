@@ -106,11 +106,11 @@ input:-webkit-autofill:focus {
 }
 
 .mt-base {
-  margin-top: var(--space-base);
+  margin-top: var(--space-base) !important;
 }
 .mb-base {
-  margin-bottom: var(--space-base);
+  margin-bottom: var(--space-base) !important;
 }
 .mr-sm {
-  margin-right: var(--space-sm);
+  margin-right: var(--space-sm) !important;
 }

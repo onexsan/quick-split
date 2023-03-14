@@ -71,11 +71,11 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-import useSplit from '@/composables/useSplit';
+import { useSplit } from '@/composables/useSplit';
 
-const sum = ref<number | undefined>(undefined);
-const friends = ref<number | undefined>(undefined);
-const tip = ref<number | undefined>(undefined);
+const sum = ref<number>();
+const friends = ref<number>();
+const tip = ref<number>();
 const includeTip = ref<boolean>(false);
 const tipFormatter = (value: number | string) => (value ? `${value}%` : '');
 const result = ref<number | null>(null);

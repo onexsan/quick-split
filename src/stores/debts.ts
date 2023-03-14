@@ -25,9 +25,9 @@ export const useDebtsStore = defineStore('debts', () => {
         const defaultDebt: SimplifiedDebt = {
           itemId: debt.itemId,
           debt: debt.debt,
-          itemName: debt.itemName,
+          itemName: debt.itemName.toString(),
         };
-        if (!map[friend]) {
+        if (!map[friend] && foundFriendName) {
           map[friend] = {
             name: foundFriendName,
             id: friend,
@@ -49,17 +49,17 @@ export const useDebtsStore = defineStore('debts', () => {
     return map;
   });
 
-  const simplifiedDebts = computed((): any => {
+  const simplifiedDebts = computed((): SimplifiedDebt[] => {
     return Object.keys(friendsWithDebts.value)
-      .map((key: any) => {
-        const friend = friendsWithDebts.value[key];
+      .map((key: string) => {
+        const friend = friendsWithDebts.value[+key];
         return {
-          name: friend.name,
-          id: +key,
-          debts: friend.debts.reduce((acc, item) => (acc += item.debt), 0),
+          itemName: friend.name,
+          itemId: +key,
+          debt: friend.debts.reduce((acc, item) => (acc += item.debt), 0),
         };
       })
-      .filter(el => el.debts !== 0 && el.id !== payerStore.payer.id);
+      .filter(el => el.debt !== 0 && el.itemId !== payerStore.payer.id);
   });
 
   const getFullDebts = (id: number) => {

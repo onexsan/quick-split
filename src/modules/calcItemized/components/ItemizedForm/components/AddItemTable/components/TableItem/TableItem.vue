@@ -42,7 +42,7 @@
 
 <script lang="ts">
 type Debt = {
-  itemName: string | undefined;
+  itemName: string;
   price: number;
   debt: number;
   itemId: number;
@@ -55,7 +55,7 @@ interface Props {
 
 <script lang="ts" setup>
 import { computed, ref, watch } from 'vue';
-import useSplit from '@/composables/useSplit';
+import { useSplit } from '@/composables/useSplit';
 import { useFriendsStore } from '@/stores/friends';
 import { useItemsStore } from '@/stores/items';
 
@@ -122,7 +122,7 @@ const toggleFriendActivity = function (id: number) {
 const deleteItem = () => {
   changeItemList('remove', props.item.itemId);
 };
-const updItem = (field: string, value: string | number | undefined) => {
+const updItem = (field: 'itemName' | 'price', value: string | number) => {
   updateItem({
     id: props.item.itemId,
     field,

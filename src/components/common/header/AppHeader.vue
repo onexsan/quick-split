@@ -9,7 +9,7 @@
           class="back-btn border-none"
         />
       </van-col>
-      <van-col class="align-center justify-center" span="8">
+      <van-col class="d-flex-center" span="8">
         <RouterLink class="logo" to="/"> Quick Split </RouterLink>
       </van-col>
     </van-row>
@@ -42,6 +42,7 @@ const showBackBtn = computed(() => {
   .back-btn {
     padding: var(--space-sm);
     height: 38px;
+    margin-left: 16px;
 
     &:hover {
       color: var(--primary);

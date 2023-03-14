@@ -1,3 +1,4 @@
+import type { Router } from 'vue-router'
 const CalcItemizedView = () => import('./views/CalcItemizedView.vue');
 
 const moduleRoute = {
@@ -6,6 +7,6 @@ const moduleRoute = {
   component: CalcItemizedView,
 };
 
-export default (router: any) => {
+export default (router: Router) => {
   router.addRoute(moduleRoute);
 };

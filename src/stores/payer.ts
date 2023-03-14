@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import type { Friend } from './types';
+import type { Friend, SimplifiedDebt } from './types';
 import { useFriendsStore } from './friends';
 import { useItemsStore } from './items';
 import { useDebtsStore } from './debts';
@@ -19,15 +19,15 @@ export const usePayerStore = defineStore('payer', () => {
 
   const paidSum = computed(() => {
     return itemsStore.itemList.reduce((acc, item) => {
-      return (acc += item.price);
+      return (acc += +item.price);
     }, 0);
   });
 
   const returnSum = computed(() => {
     if (!debtsStore.simplifiedDebts.length) return 0;
     const debtSum = debtsStore.simplifiedDebts.reduce(
-      (acc: number, item: any) => {
-        return (acc += item.debts);
+      (acc: number, item: SimplifiedDebt) => {
+        return (acc += item.debt);
       },
       0
     );
